@@ -1,0 +1,729 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>Lanches Morenos</title>
+  <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Maven+Pro:400,900' rel='stylesheet' type='text/css'>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <style>
+      /* select based on a work by Thibaut Courouble - cssflow.com
+*/
+* {
+  margin: 0;
+  padding: 0;
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+}
+
+body {
+  font-family: "Maven Pro", sans-serif;
+  font-weight: 400;
+  color: #1b464d;
+  background: #f5fdff;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  margin: 60px auto;
+  width: 400px;
+  background: #FFD700;
+  -moz-border-radius-bottomleft: 12px;
+  -webkit-border-bottom-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  -moz-border-radius-bottomright: 12px;
+  -webkit-border-bottom-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow: hidden;
+}
+.container form {
+  padding: 60px 20px 20px 20px;
+  text-align: center;
+}
+.container .bottomActionBar {
+  margin: 0;
+  background: #dcf3fa;
+  border-top: 1px solid #f5fdff;
+  padding: 20px;
+  text-align: center;
+}
+.container .bottomActionBar * {
+  margin: 0;
+}
+
+form > * {
+  margin-bottom: 40px;
+}
+
+input[type=text] {
+  height: 24px;
+  width: 250px;
+  padding: 8px 10px;
+}
+input[type=text]:hover, input[type=text]:focus {
+  color: #ff7c4d;
+}
+
+.dropdown, input[type=text] {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background: #dcf3fa;
+  border-radius: 5px;
+  border: 0;
+  font-size: 16px;
+  color: #9fbbc2;
+  -moz-transition: all 300ms ease;
+  -o-transition: all 300ms ease;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+}
+
+.dropdown {
+  height: 40px;
+  width: 270px;
+}
+
+.dropdown:hover, .dropdown:focus, input[type=text]:hover, input[type=text]:focus {
+  background: #f5fdff;
+  -moz-box-shadow: 0 1px 3px #b4d3db;
+  -webkit-box-shadow: 0 1px 3px #b4d3db;
+  box-shadow: 0 1px 3px #b4d3db;
+  top: -1px;
+}
+
+.dropdown:hover:before, .dropdown:hover:after {
+  border-color: #ff7c4d transparent;
+}
+
+.dropdown:before, .dropdown:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px dashed;
+  border-color: #b4d3db transparent;
+  pointer-events: none;
+}
+
+.dropdown:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.dropdown:after {
+  margin-top: 10px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.dropdown-select {
+  position: relative;
+  font-size: 16px;
+  color: #b4d3db;
+  padding: 10px;
+  width: 130%;
+  margin: 0;
+  line-height: 20px;
+  background: #f5fdff;
+  background: transparent !important;
+  /* "transparent" doesn't work with Opera */
+  border: 0;
+  border-radius: 0;
+  -moz-outline-radius: 2px;
+  -webkit-outline-radius: 2px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: radio-container;
+}
+.dropdown-select:hover {
+  color: #ff7c4d;
+}
+
+.dropdown-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #ff7c4d;
+  outline: 0px solid #b4d3db;
+  outline-offset: -6px;
+  background: #f5fdff;
+}
+
+.dropdown-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f5fdff;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+/* Cleaner code but doesn't work in FireFox :(
+
+input[type=radio] {
+ margin: 0 0 0 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: $inputBGBlue;
+  padding: 9px;
+  border-radius: 50px;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  
+  + label {
+    padding-left: 8px;
+  }
+  
+  &:not(:checked) + label {
+    color: $textGreyedOut;
+  }
+    
+  &:hover {
+    background-color: $coolWhite; 
+    @include box-shadow(0 1px 3px #b4d3db);
+    
+    + label {
+      color: $textDarkGreen;
+    }
+  }
+    
+  &:checked {
+    background-color: $coolWhite;
+    
+    + label {
+      color: $orange;
+    }
+    
+    &:after {
+      content: ' ';
+      width: 12px;
+      height: 12px;
+      border-radius: 50px;
+      position: absolute;
+      top: 3px;
+      background: $orange;
+      text-shadow: 0px;
+      left: 3px;
+      font-size: 32px;
+    }
+  }
+}
+
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: $inputBGBlue;
+  padding: 9px;
+  border-radius: 3px;
+  margin: 0 0 0 20px;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  
+  + label {
+    padding-left: 8px;
+  }
+  
+  &:hover {
+    background-color: $coolWhite; 
+    @include box-shadow(0 1px 3px #b4d3db);
+  }
+    
+  &:checked {
+    background-color: $coolWhite;
+    color: $orange;
+      
+    + label {
+      color: $orange;
+    }
+
+    &:after {
+      content: '\2714';
+      font-size: 14px;
+      position: absolute;
+      top: 0px;
+      left: 3px;
+      color: $orange;
+    }
+  }
+}
+*/
+input[type=checkbox], input[type=radio] {
+  visibility: hidden;
+  display: none;
+}
+
+.segmentedButton {
+  position: relative;
+  margin: 0 10px 0 10px;
+  display: inline-block;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+.segmentedButton input[type=radio] {
+  margin: 0;
+  padding: 0;
+}
+.segmentedButton input[type=radio]:checked + label {
+  background: #f5fdff;
+  color: #ff7c4d;
+  padding: 15px 13px 15px 27px;
+}
+.segmentedButton input[type=radio]:checked + label:before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 4px;
+  background: transparent;
+  border: 3px solid #ffb49a;
+  border-top: none;
+  border-right: none;
+  left: 12px;
+  top: 17px;
+}
+.segmentedButton label {
+  position: relative;
+  padding: 15px 20px;
+  margin: 0;
+  background: #dcf3fa;
+  color: #9fbbc2;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+.segmentedButton label:before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 4px;
+  background: transparent;
+  border: 3px solid #dcf3fa;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -moz-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
+  left: 6px;
+  top: 22px;
+}
+.segmentedButton label:first-of-type {
+  -moz-border-radius: 10px 0 0 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px 0 0 10px;
+}
+.segmentedButton label:last-of-type {
+  -moz-border-radius: 0 10px 10px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 10px 10px 0;
+}
+.segmentedButton label:hover {
+  background: #f5fdff;
+  color: #ff7c4d;
+  cursor: pointer;
+}
+.segmentedButton label:hover:before {
+  border-color: #f5fdff;
+}
+.segmentedButton:hover {
+  -moz-box-shadow: 0 1px 3px #b4d3db;
+  -webkit-box-shadow: 0 1px 3px #b4d3db;
+  box-shadow: 0 1px 3px #b4d3db;
+  top: -1px;
+}
+
+.radioItem {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.radioItem input[type=radio] + label {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  background: #dcf3fa;
+  top: 0;
+}
+.radioItem input[type=radio] + label:after {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ff7c4d;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  top: 3px;
+  left: 3px;
+}
+
+.radioItem:hover input[type=radio]:not(:checked) + label {
+  background-color: #f5fdff;
+  -moz-box-shadow: 0 1px 3px #b4d3db;
+  -webkit-box-shadow: 0 1px 3px #b4d3db;
+  box-shadow: 0 1px 3px #b4d3db;
+  top: -1px;
+}
+.radioItem:hover input[type=radio]:not(:checked) + label::after {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  opacity: 0.3;
+}
+
+/* Not Working 
+
+input[type=radio]:not(:checked) + label:last-of-type {
+  color: $textGreyedOut;
+  border: 1px solid red;
+}
+*/
+.radioItem input[type=radio]:checked + label {
+  background-color: #f5fdff;
+}
+.radioItem input[type=radio]:checked + label:after {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+.radioText {
+  padding-left: 30px;
+}
+
+.checkboxItem {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 20px;
+}
+.checkboxItem input[type=checkbox] + label {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  border-radius: 4px;
+  background: #dcf3fa;
+}
+.checkboxItem input[type=checkbox] + label:after {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  opacity: 0;
+  content: ' ';
+  position: absolute;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  top: 1px;
+  right: -2px;
+  border: 5px solid #ff7c4d;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.checkboxItem:hover input[type=checkbox]:not(:checked) + label {
+  background: #f5fdff;
+  -moz-box-shadow: 0 1px 3px #b4d3db;
+  -webkit-box-shadow: 0 1px 3px #b4d3db;
+  box-shadow: 0 1px 3px #b4d3db;
+  top: -1px;
+}
+.checkboxItem:hover input[type=checkbox]:not(:checked) + label::after {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  opacity: 0.3;
+}
+.checkboxItem:active label:first-of-type {
+  top: 0;
+}
+.checkboxItem input[type=checkbox]:checked + label {
+  background: #f5fdff;
+}
+.checkboxItem input[type=checkbox]:checked + label:after {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+.checkboxItem .checkboxText {
+  padding-left: 30px;
+}
+
+/* Fix for IE 8 putting the arrows behind the select element. */
+.lt-ie9 .dropdown {
+  z-index: 1;
+}
+
+.lt-ie9 .dropdown-select {
+  z-index: -1;
+}
+
+.lt-ie9 .dropdown-select:focus {
+  z-index: 3;
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+@-moz-document url-prefix() {
+  .dropdown-select {
+    padding-left: 6px;
+  }
+}
+a, :focus {
+  outline: none;
+}
+
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+select::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: none;
+}
+
+.blueButton {
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  padding: 16px 36px;
+  display: inline-block;
+  margin-bottom: 20px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #005fd5;
+  -moz-box-shadow: 0 1px 2px #a7c5cc;
+  -webkit-box-shadow: 0 1px 2px #a7c5cc;
+  box-shadow: 0 1px 2px #a7c5cc;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwOTBmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNDVmNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0090ff), color-stop(100%, #0045f4));
+  background-image: -moz-linear-gradient(#0090ff, #0045f4);
+  background-image: -webkit-linear-gradient(#0090ff, #0045f4);
+  background-image: linear-gradient(#0090ff, #0045f4);
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 900;
+  color: #f5fdff;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+.blueButton:hover {
+  position: relative;
+  top: -1px;
+  color: #fff;
+  background-color: #0090ff;
+  -moz-box-shadow: 0 1px 4px #7d9399;
+  -webkit-box-shadow: 0 1px 4px #7d9399;
+  box-shadow: 0 1px 4px #7d9399;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwOGFlMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNWZkNSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #008ae0), color-stop(100%, #005fd5));
+  background-image: -moz-linear-gradient(#008ae0, #005fd5);
+  background-image: -webkit-linear-gradient(#008ae0, #005fd5);
+  background-image: linear-gradient(#008ae0, #005fd5);
+}
+.blueButton:visited {
+  color: ##FF4500;
+}
+.blueButton:active {
+  position: relative;
+  top: 2px;
+}
+
+.smallBlueButton {
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Maven Pro', sans-serif;
+  font-weight: 900;
+  position: relative;
+  background-color: #FF4500;
+  padding: 6px 14px 6px 16px;
+  display: inline-block;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  /* text styling */
+  color: #f5fdff;
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+.smallBlueButton:hover {
+  color: #fff;
+  background-color: #0060d6;
+  -moz-box-shadow: 0 1px 2px #a7c5cc;
+  -webkit-box-shadow: 0 1px 2px #a7c5cc;
+  box-shadow: 0 1px 2px #FF4500;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwOTBmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNDVmNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0090ff), color-stop(100%, #0045f4));
+  background-image: -moz-linear-gradient(#0090ff, #0045f4);
+  background-image: -webkit-linear-gradient(#0090ff, #0045f4);
+  background-image: linear-gradient(#0090ff, #0045f4);
+}
+.smallBlueButton:visited {
+  color: #f5fdff;
+}
+.smallBlueButton:active {
+  background-color: #2b78d6;
+  -moz-box-shadow: 0 0 0 #a7c5cc;
+  -webkit-box-shadow: 0 0 0 #a7c5cc;
+  box-shadow: 0 0 0 #a7c5cc;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzE5OWJmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBmNTNmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #199bff), color-stop(100%, #0f53ff));
+  background-image: -moz-linear-gradient(#199bff, #0f53ff);
+  background-image: -webkit-linear-gradient(#199bff, #0f53ff);
+  background-image: linear-gradient(#199bff, #0f53ff);
+}
+
+.save {
+  position: relative;
+}
+
+.saving {
+  padding: 6px 26px 6px 16px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwOTBmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwNDVmNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0090ff), color-stop(100%, #0045f4));
+  background-image: -moz-linear-gradient(#0090ff, #0045f4);
+  background-image: -webkit-linear-gradient(#0090ff, #0045f4);
+  background-image: linear-gradient(#0090ff, #0045f4);
+}
+.saving:after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background: url("https://s3.amazonaws.com/web-images.spritzr.com/loader.gif");
+}
+
+    </style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+</head>
+
+<body translate="no" >
+
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head></head>
+  <body>
+    <section class="container">
+      
+ <form id="cadastro" name="cadastro" method="post" action="cadastropedido.php" onsubmit="return validaCampo(); return false;">
+        <img src=".png">
+          
+        
+          <div>Lanches:
+            <span class="checkboxItem">
+              <input type="checkbox" id="xburger" name="xburger" value="xburger" /><label for="xburger"></label><label for="xburger" class="checkboxText">X-BURGER</label> 
+            </span>
+            <span class="checkboxItem">
+              <input type="checkbox" id="xsalada" name="xsalada" value="xsalada" /><label for="xsalada"></label><label for="xsalada" class="checkboxText">X-SALADA</label> 
+            </span>
+          </div>
+          
+          <div>Bebidas:
+            <span class="checkboxItem">
+              <input type="checkbox" id="guarana" name="guarana" value="guarana" /><label for="guarana"></label><label for="guarana" class="checkboxText">GUARANA</label> 
+            </span>
+            <span class="checkboxItem">
+              <input type="checkbox" id="coca" name="coca" value="coca" /><label for="coca"></label><label for="coca" class="checkboxText">COCA</label> 
+            </span>
+          </div>
+          
+          <div>Qual é a sua mesa?
+            <span class="segmentedButton"><input type="radio" id="mesa01" name="mesa01" value="mesa01" /><label for="mesa01" class="radioText">01</label>
+			<input type="radio" id="mesa02" name="mesa02" value="mesa02" /><label for="mesa02">02</label></span>
+          </div>
+         
+		  <center> <input name="cadastrar" class="smallBlueButton save" type="submit" id="cadastrar" value="Concluir Pedido"/> </center> 
+        </form>   
+        
+        
+      </section>
+    </body>
+</html>
+    <script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js"></script>
+
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script >
+    $(document).ready(function() {  
+  $('select').focus(function() {
+    $(this).parent().attr('style', 'background: #f5fdff');
+  }).focusout(function() {
+    $(this).attr('style', 'color: #ff7c4d').parent().attr('style', '');;
+  });
+  
+  $('input').focusout(function() {
+    $(this).attr('style', 'color: #ff7c4d');
+  });
+  
+  $('.save').mouseup(function() {
+    $(this).toggleClass('saving');
+  });
+});
+  //# sourceURL=pen.js
+  </script>
+
+  
+  
+
+</body>
+</html>
+ 

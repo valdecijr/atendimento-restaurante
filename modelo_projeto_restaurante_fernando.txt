@@ -1,0 +1,47 @@
+*Pedido feito no local:
+1mesa 
+2produto / valor
+3observações
+(cliente envia)
+
+(Adm recebe)
+1numerodamesa
+2nomedoproduto/valordoproduto
+3observaçõesdocliente
+
+///////////////////////////////////////
+
+pedido feito externo:
+1nome
+2produto / valor
+3Endereço
+4telefone
+5formadepagamento
+6precisa de troco?
+
+(Adm recebe)
+1nomedocliente
+2endereçodocliente
+3telefonedocliente
+4telefonedocliente
+5crédito/débito/dinheiro
+6troco: sim ou não
+
+//////////////////////////////////////////
+
+caixa
+fluxo:
+1°Recebe o pedido = ID será o código da comanda;
+2°depois faz o Lançamento dos atendimentos;
+3°gerando o total do dia;
+
+Estoque:
+1°Tela de Cadastro de produtos;
+2°Tela de tabela com os produtos cadastrados:
+Tabela:
+1-ID
+2-Produto
+3-Quantidade
+
+
+
